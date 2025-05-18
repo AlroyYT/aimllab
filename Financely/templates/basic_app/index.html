@@ -1,0 +1,920 @@
+
+{% extends 'basic_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="financely-dashboard">
+  <!-- Hero Section with Animated Gradient -->
+  <div class="hero-section">
+    <div class="hero-backdrop"></div>
+    <div class="hero-content">
+      <div class="logo-container">
+        <img class="logo animate-float" src="{% static 'images/favicon1.png' %}" alt="Financely Logo">
+      </div>
+      <h1 class="hero-title">Welcome to <span class="text-gradient">Financely</span></h1>
+      <p class="hero-description">Your AI-powered financial advisor and portfolio manager</p>
+      <div class="cta-buttons">
+        <a href="{% url 'basic_app:portfolio' %}" class="btn-primary">Manage Portfolio</a>
+        <a href="#trending-news" class="btn-secondary">View Market News</a>
+      </div>
+    </div>
+    
+    <!-- Animated Stock Ticker -->
+    <div class="stock-ticker-container">
+      <div class="stock-ticker">
+        <div class="ticker-item"><span class="symbol">AAPL</span> <span class="price up">182.63</span> <span class="change">+1.2%</span></div>
+        <div class="ticker-item"><span class="symbol">TSLA</span> <span class="price up">246.98</span> <span class="change">+3.4%</span></div>
+        <div class="ticker-item"><span class="symbol">MSFT</span> <span class="price up">421.78</span> <span class="change">+0.8%</span></div>
+        <div class="ticker-item"><span class="symbol">GOOG</span> <span class="price down">170.12</span> <span class="change">-0.5%</span></div>
+        <div class="ticker-item"><span class="symbol">AMZN</span> <span class="price up">186.50</span> <span class="change">+1.7%</span></div>
+        <div class="ticker-item"><span class="symbol">NFLX</span> <span class="price down">632.79</span> <span class="change">-0.3%</span></div>
+        <div class="ticker-item"><span class="symbol">META</span> <span class="price up">502.35</span> <span class="change">+2.1%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="features-section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Powered by AI</h2>
+        <p>Intelligent financial insights at your fingertips</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" class="icon-chart">
+              <path d="M3,12H7V21H3V12M9,8H13V21H9V8M15,4H19V21H15V4Z"></path>
+            </svg>
+          </div>
+          <h3>Real-time Stock Analysis</h3>
+          <p>Access comprehensive technical and financial analysis to make informed decisions.</p>
+        </div>
+        
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" class="icon-news">
+              <path d="M20,5H4V19L13.2,15.2C13.7,15,14.3,15,14.8,15.2L20,17.7V5M4,3H20A2,2 0 0,1 22,5V21L14,17L4,21V5A2,2 0 0,1 4,3Z"></path>
+            </svg>
+          </div>
+          <h3>Smart News Analysis</h3>
+          <p>Stay ahead with AI-curated market news and sentiment analysis for your investments.</p>
+        </div>
+        
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" class="icon-prediction">
+              <path d="M12,3C16.97,3 21,7.03 21,12C21,16.97 16.97,21 12,21C7.03,21 3,16.97 3,12C3,7.03 7.03,3 12,3M12,5C8.13,5 5,8.13 5,12C5,15.87 8.13,19 12,19C15.87,19 19,15.87 19,12C19,8.13 15.87,5 12,5M11.5,7V12.25L16,14.92L15.25,16.15L10,13V7H11.5Z"></path>
+            </svg>
+          </div>
+          <h3>Price Predictions</h3>
+          <p>Leverage AI-powered forecasting models to anticipate future market movements.</p>
+        </div>
+        
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" class="icon-portfolio">
+              <path d="M21,18H24V20H21V23H19V20H16V18H19V15H21V18M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H15.5C15.18,20.23 15,19.39 15,18.5C15,14.91 17.91,12 21.5,12C22.39,12 23.23,12.18 24,12.5V5C24,3.89 23.11,3 22,3H19M12,8H17V12H12V8M7,8H10V10H7V8M7,11H10V13H7V11M7,14H10V16H7V14M12,14H17V16H12V14Z"></path>
+            </svg>
+          </div>
+          <h3>Portfolio Management</h3>
+          <p>Optimize your investment strategy with personalized buy, sell, or hold recommendations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Overview -->
+  <div class="portfolio-section">
+    <div class="container">
+      <div class="portfolio-card">
+        <div class="portfolio-header">
+          <h2>Your Portfolio</h2>
+          <a href="{% url 'basic_app:portfolio' %}" class="view-all">View Details <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path></svg></a>
+        </div>
+        
+        <div class="portfolio-summary">
+          <div class="summary-card">
+            <div class="summary-value">{{ stocks|length }}</div>
+            <div class="summary-label">Assets</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">--</div>
+            <div class="summary-label">Total Value</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value profit">+12.4%</div>
+            <div class="summary-label">Performance</div>
+          </div>
+        </div>
+        
+        <div class="portfolio-content">
+          <div class="table-responsive">
+            <table class="portfolio-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Added On</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for stock in stocks %}
+                <tr class="table-row-animate">
+                  <td class="stock-symbol">{{ stock.stock_symbol }}</td>
+                  <td>{{ stock.stock_name }}</td>
+                  <td>{{ stock.quantity }}</td>
+                  <td>{{ stock.date_added|date:"M d, Y" }}</td>
+                  <td><span class="status-badge hold">HOLD</span></td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5" class="empty-portfolio">
+                    <div class="empty-state">
+                      <svg viewBox="0 0 24 24" width="48" height="48">
+                        <path fill="currentColor" d="M19,13H5V11H19V13M19,9H5V7H19V9M19,5H5V3H19V5M3,17H21V21H3V17Z"></path>
+                      </svg>
+                      <p>Your portfolio is empty. Start by adding stocks!</p>
+                      <a href="{% url 'basic_app:portfolio' %}" class="btn-outline">Add Stocks</a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trending News Section -->
+  <div id="trending-news" class="news-section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Trending News</h2>
+        <p>Stay informed with the latest market updates</p>
+      </div>
+      
+      <div class="news-grid">
+        {% for key, value in news.items %}
+        <div class="news-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+          <div class="news-image">
+            <img src="{{ value.urlToImage }}" alt="{{ value.title }}">
+            <div class="news-source">{{ value.source.name }}</div>
+          </div>
+          <div class="news-content">
+            <h3 class="news-title">{{ value.title }}</h3>
+            <p class="news-description">{{ value.description }}</p>
+            <a href="{{ value.url }}" target="_blank" class="read-more">
+              Read Article <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"></path></svg>
+            </a>
+          </div>
+        </div>
+        {% empty %}
+        <div class="no-news">
+          <p>No market news available at the moment. Please check back later.</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Call to Action Section -->
+  <div class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to optimize your investments?</h2>
+        <p>Let our AI-powered platform help you make smarter financial decisions.</p>
+        <a href="{% url 'basic_app:portfolio' %}" class="btn-primary">Get Started</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Custom JS -->
+<script>
+  // Initialize AOS for scroll animations
+  document.addEventListener('DOMContentLoaded', function() {
+    // Simulate AOS library functionality with simple animations
+    const animateElements = document.querySelectorAll('[data-aos]');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-aos-delay') || 0;
+          setTimeout(() => {
+            entry.target.classList.add('aos-animate');
+          }, delay);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    animateElements.forEach(element => {
+      element.classList.add('aos-init');
+      observer.observe(element);
+    });
+    
+    // Animate table rows
+    const tableRows = document.querySelectorAll('.table-row-animate');
+    tableRows.forEach((row, index) => {
+      setTimeout(() => {
+        row.classList.add('visible');
+      }, 100 * index);
+    });
+    
+    // Animate stock ticker
+    const tickerItems = document.querySelector('.stock-ticker');
+    if (tickerItems) {
+      tickerItems.style.animation = 'ticker-slide 30s linear infinite';
+    }
+  });
+</script>
+
+<style>
+  /* Reset and Base Styles */
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --secondary: #6366f1;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --gray: #64748b;
+    --gray-light: #e2e8f0;
+    --text: #0f172a;
+    --text-light: #64748b;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --transition: all 0.3s ease;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  .financely-dashboard {
+    font-family: var(--font-sans);
+    color: var(--text);
+    line-height: 1.5;
+    background-color: #f1f5f9;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    min-height: 500px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+    color: white;
+    overflow: hidden;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index:0;
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.33) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.28) 0%, transparent 40%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .logo-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Stock Ticker */
+  .stock-ticker-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    height: 60px;
+    z-index: 2;
+  }
+
+  .stock-ticker {
+    display: flex;
+    white-space: nowrap;
+    padding: 1rem 0;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 2rem;
+    font-size: 1rem;
+    padding: 0.25rem 1rem;
+    border-radius: var(--radius);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .ticker-item .symbol {
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+
+  .ticker-item .change {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .price.up {
+    color: #10b981;
+  }
+
+  .price.down {
+    color: #ef4444;
+  }
+
+  /* Features Section */
+  .features-section {
+    padding: 5rem 1rem;
+    background-color: white;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-heading h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+  }
+
+  .section-heading p {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background-color: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  .feature-card.aos-init.aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+  }
+
+  .feature-icon {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+
+  .feature-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--dark);
+  }
+
+  .feature-card p {
+    color: var(--text-light);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* Portfolio Section */
+  .portfolio-section {
+    padding: 2rem 1rem 5rem;
+    background-color: #f1f5f9;
+  }
+
+  .portfolio-card {
+    background-color: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .portfolio-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--gray-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .portfolio-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .view-all {
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .view-all:hover {
+    color: var(--primary-dark);
+  }
+
+  .portfolio-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background-color: #f8fafc;
+  }
+
+  .summary-card {
+    text-align: center;
+  }
+
+  .summary-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .summary-value.profit {
+    color: var(--success);
+  }
+
+  .summary-label {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+  }
+
+  .portfolio-content {
+    padding: 0 1rem 1.5rem;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    margin: 0 -1rem;
+  }
+
+  .portfolio-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9375rem;
+  }
+
+  .portfolio-table thead th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  .portfolio-table tbody td {
+    padding: 1rem;
+    border-top: 1px solid var(--gray-light);
+    transition: var(--transition);
+  }
+
+  .portfolio-table tbody tr {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .portfolio-table tbody tr.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .portfolio-table tbody tr:hover {
+    background-color: #f1f5f9;
+  }
+
+  .stock-symbol {
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  .status-badge.buy {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+  }
+
+  .status-badge.sell {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+  }
+
+  .status-badge.hold {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+  }
+
+  .empty-portfolio {
+    text-align: center;
+  }
+
+  .empty-state {
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-light);
+  }
+
+  .empty-state svg {
+    opacity: 0.5;
+    margin-bottom: 1rem;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+    transition: var(--transition);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  /* News Section */
+  .news-section {
+    padding: 5rem 1rem;
+    background-color: white;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .news-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: white;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-light);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  .news-card.aos-init.aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+  }
+
+  .news-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .news-card:hover .news-image img {
+    transform: scale(1.05);
+  }
+
+  .news-source {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(15, 23, 42, 0.8);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .news-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .news-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    color: var(--dark);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .news-description {
+    color: var(--text-light);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .read-more {
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: var(--transition);
+    margin-top: auto;
+  }
+
+  .read-more:hover {
+    color: var(--primary-dark);
+  }
+  .cta-section {
+    padding: 5rem 1rem;
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-content h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes ticker-slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* AOS Animation Classes */
+  [data-aos] {
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  [data-aos="fade-up"] {
+    transform: translateY(20px);
+  }
+
+  .aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .news-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .hero-title {
+      font-size: 2rem;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .stock-ticker-container {
+      display: none;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hero-section {
+      padding: 3rem 1rem;
+    }
+    
+    .section-heading h2 {
+      font-size: 1.75rem;
+    }
+    
+    .portfolio-summary {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,491 @@
+{% extends 'basic_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="cover-photo"></div>
+    <div class="profile-info">
+      <div class="profile-avatar">
+        <div class="avatar-placeholder">
+          <svg viewBox="0 0 24 24" class="avatar-icon">
+            <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path>
+          </svg>
+        </div>
+        <div class="edit-avatar">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="user-details">
+        <h1 class="user-name">Alex Johnson</h1>
+        <p class="user-email">alex.johnson@example.com</p>
+        <div class="account-status">
+          <span class="status-badge">Premium Member</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <div class="tabs-container">
+      <div class="tab active">Profile</div>
+      <div class="tab">Security</div>
+      <div class="tab">Preferences</div>
+      <div class="tab">Notifications</div>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <div class="card profile-card">
+      <div class="card-header">
+        <h2>Personal Information</h2>
+        <button class="btn-edit">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path>
+          </svg>
+          Edit
+        </button>
+      </div>
+      <div class="card-content">
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Full Name</span>
+            <span class="info-value">Alex Johnson</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Username</span>
+            <span class="info-value">alexj21</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email</span>
+            <span class="info-value">alex.johnson@example.com</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Phone</span>
+            <span class="info-value">+1 (555) 123-4567</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Location</span>
+            <span class="info-value">San Francisco, CA</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Member Since</span>
+            <span class="info-value">May 12, 2023</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card security-card">
+      <div class="card-header">
+        <h2>Account Security</h2>
+      </div>
+      <div class="card-content">
+        <div class="security-item">
+          <div class="security-info">
+            <div class="security-icon secure">
+              <svg viewBox="0 0 24 24">
+                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.1 14.8,9.5V11C15.4,11 16,11.6 16,12.3V15.8C16,16.4 15.4,17 14.7,17H9.2C8.6,17 8,16.4 8,15.7V12.2C8,11.6 8.6,11 9.2,11V9.5C9.2,8.1 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3>Password</h3>
+              <p>Last changed 30 days ago</p>
+            </div>
+          </div>
+          <button class="btn-text">Change</button>
+        </div>
+        
+        <div class="security-item">
+          <div class="security-info">
+            <div class="security-icon warning">
+              <svg viewBox="0 0 24 24">
+                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,8.5C13.66,8.5 15,9.84 15,11.5C15,12.5 14.5,13.38 13.76,13.93L14.75,17H9.25L10.25,13.93C9.5,13.38 9,12.5 9,11.5C9,9.84 10.34,8.5 12,8.5M12,3C13.93,3 15.5,4.57 15.5,6.5C15.5,8.43 13.93,10 12,10C10.07,10 8.5,8.43 8.5,6.5C8.5,4.57 10.07,3 12,3Z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3>Two-Factor Authentication</h3>
+              <p>Not enabled</p>
+            </div>
+          </div>
+          <button class="btn-text">Enable</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="quick-actions">
+    <button class="btn-primary">Update Profile</button>
+    <button class="btn-outline">Log Out</button>
+  </div>
+</div>
+
+<style>
+  /* Base Styles */
+  :root {
+    --primary: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-dark: #4338ca;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --dark: #1e293b;
+    --gray: #64748b;
+    --gray-light: #e2e8f0;
+    --light: #f8fafc;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s ease;
+  }
+
+  .profile-container {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  /* Profile Header */
+  .profile-header {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    background: white;
+  }
+
+  .cover-photo {
+    height: 200px;
+    background: linear-gradient(120deg, #4338ca, #6366f1, #818cf8);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    position: relative;
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .profile-info {
+    display: flex;
+    padding: 0 2rem 1.5rem;
+    position: relative;
+  }
+
+  .profile-avatar {
+    margin-top: -50px;
+    margin-right: 2rem;
+    position: relative;
+  }
+
+  .avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #4f46e5, #818cf8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid white;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-icon {
+    fill: white;
+    width: 64px;
+    height: 64px;
+  }
+
+  .edit-avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    border: 2px solid white;
+    transition: var(--transition);
+    fill: white;
+  }
+
+  .edit-avatar:hover {
+    background: var(--primary-dark);
+    transform: scale(1.1);
+  }
+
+  .user-details {
+    padding-top: 2rem;
+  }
+
+  .user-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    color: var(--dark);
+  }
+
+  .user-email {
+    font-size: 1rem;
+    color: var(--gray);
+    margin: 0 0 1rem;
+  }
+
+  .status-badge {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  /* Tabs */
+  .profile-tabs {
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: white;
+  }
+
+  .tabs-container {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--gray);
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+
+  .tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  .tab:hover:not(.active) {
+    background-color: var(--gray-light);
+    color: var(--dark);
+  }
+
+  /* Cards */
+  .card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  .card-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--dark);
+  }
+
+  .card-content {
+    padding: 1.5rem 2rem;
+  }
+
+  /* Info Grid */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-label {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin-bottom: 0.25rem;
+  }
+
+  .info-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--dark);
+  }
+
+  /* Security Items */
+  .security-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  .security-item:last-child {
+    border-bottom: none;
+  }
+
+  .security-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .security-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+  }
+
+  .security-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+  }
+
+  .security-icon.secure {
+    background-color: var(--success);
+  }
+
+  .security-icon.warning {
+    background-color: var(--warning);
+  }
+
+  .security-info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+    color: var(--dark);
+  }
+
+  .security-info p {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin: 0;
+  }
+
+  /* Buttons */
+  .btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--light);
+    color: var(--dark);
+    border: 1px solid var(--gray-light);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+  }
+
+  .btn-edit:hover {
+    background-color: var(--gray-light);
+  }
+
+  .btn-text {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0.5rem;
+  }
+
+  .btn-text:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+
+  .quick-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-outline:hover {
+    background-color: rgba(79, 70, 229, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .profile-info {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .profile-avatar {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock %}
