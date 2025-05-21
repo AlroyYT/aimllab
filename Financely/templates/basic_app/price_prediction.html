@@ -1,8 +1,685 @@
 {% extends "basic_app/base.html" %}
 {% block content %}
-<center>
-  <h1>Predicted Price Trend</h1>
-  <img src="data:image/png;base64,{{price_prediction | safe}}" alt="">
-</center>
+<div class="prediction-container">
+  <div class="header-section">
+    <h1 class="prediction-title">Market Forecast</h1>
+    <div class="ticker-badge" id="ticker-badge">
+      <!-- This will be filled by JS -->
+    </div>
+  </div>
+  
+  <!-- Chart Container -->
+  <div class="chart-container">
+    <div class="chart-card">
+      <div class="chart-header">
+        <h2>365-Day Price Projection</h2>
+        <span class="updated-text">Updated: <span id="current-date"></span></span>
+      </div>
+      <div class="chart-wrapper">
+        <div class="chart-loading" id="loading-animation">
+          <div class="spinner"></div>
+          <p>Analyzing market data...</p>
+        </div>
+        <img src="data:image/png;base64,{{price_prediction | safe}}" alt="Price Prediction Chart" id="prediction-chart" class="prediction-image">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Key Metrics Section -->
+  <div class="metrics-container">
+    <div class="metrics-card">
+      <h2 class="metrics-title">Key Forecast Metrics</h2>
+      
+      <div class="summary-section">
+        <div class="summary-metric highlight-metric">
+          <div class="summary-icon {{metrics.trend_class}}">
+            <i class="fas fa-{{metrics.trend_icon}}"></i>
+          </div>
+          <div class="summary-content">
+            <span class="summary-label">Forecast Trend</span>
+            <span class="summary-value {{metrics.trend_class}}">{{metrics.trend|title}}</span>
+          </div>
+        </div>
+        
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="metric-label">Current Price</span>
+            <span class="metric-value">${{metrics.last_price}}</span>
+            <span class="metric-date">as of {{metrics.last_date}}</span>
+          </div>
+          
+          <div class="metric-item">
+            <span class="metric-label">Projected Price (1 Year)</span>
+            <span class="metric-value">${{metrics.forecast_end_price}}</span>
+            <span class="metric-change {{metrics.growth_class}}">
+              {{metrics.growth_pct}}% <i class="fas fa-{{metrics.growth_icon}}"></i>
+            </span>
+          </div>
+          
+          <div class="metric-item">
+            <span class="metric-label">Projected High</span>
+            <span class="metric-value">${{metrics.peak_price}}</span>
+            <span class="metric-change positive">
+              +{{metrics.peak_growth}}% <i class="fas fa-arrow-up"></i>
+            </span>
+          </div>
+          
+          <div class="metric-item">
+            <span class="metric-label">Projected Low</span>
+            <span class="metric-value">${{metrics.min_price}}</span>
+            <span class="metric-change {{metrics.min_class}}">
+              {{metrics.min_decline}}% <i class="fas fa-{{metrics.min_icon}}"></i>
+            </span>
+          </div>
+          
+          <div class="metric-item">
+            <span class="metric-label">Volatility Index</span>
+            <span class="metric-value">{{metrics.volatility}}%</span>
+            <span class="metric-info">Predicted price fluctuation</span>
+          </div>
+          
+          <div class="metric-item">
+            <span class="metric-label">Key Levels</span>
+            <span class="metric-value">
+              <span class="support-level">S: ${{metrics.support_level}}</span> / 
+              <span class="resistance-level">R: ${{metrics.resistance_level}}</span>
+            </span>
+            <span class="metric-info">Support / Resistance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Quarterly Forecast Table -->
+  <div class="quarterly-container">
+    <div class="quarterly-card">
+      <h2 class="quarterly-title">Quarterly Breakdown</h2>
+      <div class="quarterly-table-wrapper">
+        <table class="quarterly-table">
+          <thead>
+            <tr>
+              <th>Period</th>
+              <th>Average</th>
+              <th>Range (Min-Max)</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for quarter in metrics.quarterly_forecast %}
+            <tr>
+              <td>{{quarter.period}}</td>
+              <td>${{quarter.avg_price}}</td>
+              <td>${{quarter.min_price}} - ${{quarter.max_price}}</td>
+              <td>{{quarter.end_date}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Insights Section -->
+  <div class="insight-section">
+    <div class="insight-card">
+      <h3>Prophet AI Forecast Insights</h3>
+      <div class="insight-content">
+        <p class="insight-text">{{metrics.insight_text}}</p>
+        
+        <div class="time-horizon-section">
+          <h4>Time Horizon Analysis</h4>
+          <div class="time-horizons">
+            <div class="time-horizon-item {{metrics.short_term_class}}">
+              <span class="horizon-label">Short Term (30 Days)</span>
+              <span class="horizon-icon"><i class="fas fa-{{metrics.short_term_icon}}"></i></span>
+              <span class="horizon-text">{{metrics.short_term_text}}</span>
+            </div>
+            
+            <div class="time-horizon-item {{metrics.mid_term_class}}">
+              <span class="horizon-label">Mid Term (90 Days)</span>
+              <span class="horizon-icon"><i class="fas fa-{{metrics.mid_term_icon}}"></i></span>
+              <span class="horizon-text">{{metrics.mid_term_text}}</span>
+            </div>
+            
+            <div class="time-horizon-item {{metrics.long_term_class}}">
+              <span class="horizon-label">Long Term (365 Days)</span>
+              <span class="horizon-icon"><i class="fas fa-{{metrics.long_term_icon}}"></i></span>
+              <span class="horizon-text">{{metrics.long_term_text}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pattern-section">
+          <h4>Detected Patterns</h4>
+          <p>{{metrics.seasonal_pattern}}</p>
+          <p>{{metrics.additional_insights}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <p><strong>Disclaimer:</strong> This forecast is generated using Prophet, a statistical forecasting model. It should be used for informational purposes only and not as financial advice. Past performance is not indicative of future results.</p>
+  </div>
+</div>
 
+<script>
+  // Display current date
+  const now = new Date();
+  document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  });
+  
+  // Extract ticker from URL if available
+  const pathParts = window.location.pathname.split('/');
+  const tickerIndex = pathParts.indexOf('price_prediction') - 1;
+  const ticker = tickerIndex >= 0 && pathParts[tickerIndex] ? pathParts[tickerIndex].toUpperCase() : 'STOCK';
+  document.getElementById('ticker-badge').textContent = ticker;
+  
+  // Chart loading animation
+  window.addEventListener('load', function() {
+    const loadingAnimation = document.getElementById('loading-animation');
+    const chart = document.getElementById('prediction-chart');
+    
+    // Simulate loading for 800ms
+    setTimeout(() => {
+      loadingAnimation.style.opacity = '0';
+      setTimeout(() => {
+        loadingAnimation.style.display = 'none';
+        chart.style.opacity = '1';
+      }, 300);
+    }, 800);
+  });
+</script>
+
+<style>
+  .prediction-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+  }
+  
+  .header-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+  }
+  
+  .prediction-title {
+    font-size: 36px;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 600;
+    position: relative;
+  }
+  
+  .prediction-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 2px;
+  }
+  
+  .ticker-badge {
+    position: absolute;
+    right: 0;
+    background: #3498db;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    animation: slidein 0.5s ease-out;
+  }
+  
+  /* Chart Section */
+  .chart-container {
+    margin-bottom: 30px;
+    animation: fadeup 0.8s ease-out;
+  }
+  
+  .chart-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .chart-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .chart-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #34495e;
+    font-weight: 600;
+  }
+  
+  .updated-text {
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+  
+  .chart-wrapper {
+    padding: 20px;
+    position: relative;
+    min-height: 400px;
+  }
+  
+  .prediction-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .chart-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(52, 152, 219, 0.3);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+  }
+  
+  /* Metrics Section */
+  .metrics-container {
+    margin-bottom: 30px;
+    animation: fadeup 0.9s ease-out 0.1s both;
+  }
+  
+  .metrics-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+  }
+  
+  .metrics-title {
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .summary-section {
+    margin-bottom: 20px;
+  }
+  
+  .summary-metric {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .summary-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    font-size: 24px;
+    color: white;
+  }
+  
+  .summary-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .summary-label {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 4px;
+  }
+  
+  .summary-value {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+  }
+  
+  .metric-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .metric-label {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-bottom: 4px;
+  }
+  
+  .metric-value {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .metric-change, .metric-date, .metric-info {
+    font-size: 12px;
+    color: #7f8c8d;
+  }
+  
+  /* Quarterly Table */
+  .quarterly-container {
+    margin-bottom: 30px;
+    animation: fadeup 1s ease-out 0.2s both;
+  }
+  
+  .quarterly-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+  }
+  
+  .quarterly-title {
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .quarterly-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .quarterly-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .quarterly-table th, .quarterly-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .quarterly-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #34495e;
+  }
+  
+  .quarterly-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Insights Section */
+  .insight-section {
+    margin-bottom: 30px;
+    animation: fadeup 1.1s ease-out 0.3s both;
+  }
+  
+  .insight-card {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.2);
+  }
+  
+  .insight-card h3 {
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: #ecf0f1;
+  }
+  
+  .insight-card h4 {
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #ecf0f1;
+  }
+  
+  .insight-text {
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+  }
+  
+  .time-horizons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .time-horizon-item {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+  }
+  
+  .time-horizon-item:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .horizon-label {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+  
+  .horizon-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .horizon-text {
+    font-size: 14px;
+  }
+  
+  .pattern-section p {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Disclaimer */
+  .disclaimer {
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #7f8c8d;
+    animation: fadeup 1.2s ease-out 0.4s both;
+  }
+  
+  .disclaimer p {
+    margin: 0;
+    line-height: 1.6;
+  }
+  
+  /* Helper Classes */
+  .positive {
+    color: #2ecc71;
+  }
+  
+  .negative {
+    color: #e74c3c;
+  }
+  
+  .neutral {
+    color: #f39c12;
+  }
+  
+  .strongly-bullish {
+    background-color: #27ae60;
+  }
+  
+  .moderately-bullish {
+    background-color: #2ecc71;
+  }
+  
+  .neutral-trend {
+    background-color: #f39c12;
+  }
+  
+  .moderately-bearish {
+    background-color: #e67e22;
+  }
+  
+  .strongly-bearish {
+    background-color: #e74c3c;
+  }
+  
+  .support-level {
+    color: #27ae60;
+  }
+  
+  .resistance-level {
+    color: #e74c3c;
+  }
+  
+  /* Animations */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slidein {
+    from { transform: translateX(30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .time-horizons {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .header-section {
+      flex-direction: column;
+    }
+    
+    .ticker-badge {
+      position: relative;
+      margin-top: 15px;
+      right: auto;
+    }
+    
+    .chart-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .updated-text {
+      margin-top: 5px;
+    }
+    
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media print {
+    .prediction-container {
+      padding: 0;
+    }
+    
+    .chart-card, .metrics-card, .quarterly-card, .insight-card {
+      box-shadow: none;
+      margin-bottom: 20px;
+    }
+    
+    .insight-card {
+      background: #f8f9fa;
+      color: #2c3e50;
+    }
+    
+    .insight-card h3, .insight-card h4 {
+      color: #2c3e50;
+    }
+    
+    .insight-text, .pattern-section p {
+      color: #2c3e50;
+    }
+    
+    .time-horizon-item {
+      background-color: #f8f9fa;
+      border: 1px solid #eaeaea;
+    }
+  }
+</style>
 {% endblock %}

@@ -3,6 +3,7 @@ from .models import Portfolio, Client, Stock
 from .forms import CreateUserForm
 from .sectorPerformance import sectorPerformance
 from .decorators import unauthenticated_user, allowed_users
+from .ProphetTrend import forecast
 from basic_app.stock_data import candlestick_data, get_data, get_name, get_price
 from basic_app.FA import piotroski
 # Create your views here.
@@ -207,8 +208,17 @@ def statisticsAdmin(request):
     return render(request, "basic_app/statisticsAdmin.html")
 
 def price_prediction(request, symbol):
-    price_prediction = forecast(symbol)
-    return render(request, "basic_app/price_prediction.html", {'price_prediction': price_prediction, 'page_title': "Price Prediction"})
+    price_prediction, metrics = forecast(symbol)
+    
+    if price_prediction is None:
+        # Handle error case
+        return render(request, "basic_app/error.html", {'error_message': f"Unable to retrieve data for {symbol}"})
+    
+    return render(request, "basic_app/price_prediction.html", {
+        'price_prediction': price_prediction, 
+        'metrics': metrics,
+        'page_title': f"{symbol} Forecast"
+    })
 
 def addToPortfolio(request, symbol):
     user = request.user
