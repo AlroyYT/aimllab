@@ -140,7 +140,9 @@ tr td:first-child:before
 
 
 <li>
-          <form class="d-flex">
+          <form class="d-flex" method="post">
+  {% csrf_token %}
+
           <input class="form-control me-2" id = "search-input" type="search" placeholder="Search" aria-label="Search" class="nav-link dropdown-toggle">
           <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
@@ -207,71 +209,77 @@ tr td:first-child:before
 
 </body>
 <script>
-console.log('hello world')
-const search_key = document.getElementById("search-input")
-const result_box = document.getElementById("results-box")
-const sendSearchData = (searchData) =>
-{
-  $.ajax({
-    type: 'POST',
-    url: '',
-    data: {
-      'searchData': searchData,
-      'csrfmiddlewaretoken': '{{csrf_token}}'
-    },
-    success: (res)=>{
-      console.log(res.data)
-      const data = res.data
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("search-input");
+  const resultBox = document.getElementById("results-box");
 
-      if(Array.isArray(data))
-      {
-        result_box.innerHTML=""
-        for(var i=0;i<data.length;i++)
-        {
-          var symbol = data[i].symbol
-          console.log(symbol)
-          result_box.innerHTML += `<center><a class="text-dark" href="${symbol}">${data[i].name}<p class="text-muted justify-content-center">( ${data[i].exchDisp})</p></a></center>`
+  if (!searchInput || !resultBox) return;
 
+  const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+
+  const sendSearchData = (searchData) => {
+    resultBox.innerHTML = `
+      <div class="text-center p-2">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>`;
+    resultBox.classList.remove('d-none');
+
+    $.ajax({
+      type: 'POST',
+      url: '/search/',
+      data: {
+        'searchData': searchData,
+        'csrfmiddlewaretoken': csrfToken
+      },
+      success: (res) => {
+        const data = res.data;
+        resultBox.innerHTML = '';
+
+        if (Array.isArray(data) && data.length > 0) {
+          data.forEach(item => {
+            const symbol = encodeURIComponent(item.symbol);
+            const name = item.name;
+            const exchange = item.exchDisp || '';
+
+            resultBox.innerHTML += `
+              <a class="text-dark text-decoration-none d-block px-3 py-2 border-bottom" href="/home/${symbol}/">
+                <strong>${name}</strong><br>
+                <small class="text-muted">(${exchange})</small>
+              </a>`;
+          });
+        } else {
+          resultBox.innerHTML = `<p class="text-center text-muted py-2">No results found</p>`;
         }
-
+      },
+      error: (err) => {
+        console.error("Search error:", err);
+        resultBox.innerHTML = `<p class="text-danger text-center py-2">Search failed</p>`;
       }
-      else{
-        if(search_key.value.length > 0){
-          result_box.innerHTML = '<p>'+ data+ '</p>'
+    });
+  };
 
-        }
-        else
-        {
-          console.log("hi")
-          result_box.classList.add('d-none')
-
-
-        }
-
-      }
-    },
-    error: (err)=>{
-      console.log(err)
+  let debounceTimer;
+  searchInput.addEventListener('input', (e) => {
+    const value = e.target.value.trim();
+    if (value.length === 0) {
+      resultBox.classList.add('d-none');
+      return;
     }
-  })
-}
 
-search_key.addEventListener('keyup', e=>{
-  if(result_box.classList.contains('d-none'))
-  {
-    result_box.classList.remove('d-none')
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      sendSearchData(value);
+    }, 300);
+  });
 
-  }
-
-  if(e.target.value.length > 0)
-  sendSearchData(e.target.value)
-
-  else{
-    result_box.classList.add('d-none')
-  }
-
-})
-
+  document.addEventListener('click', function (e) {
+    if (!searchInput.contains(e.target) && !resultBox.contains(e.target)) {
+      resultBox.classList.add('d-none');
+    }
+  });
+});
 </script>
 
 
