@@ -18,6 +18,28 @@ from basic_app.get_stock_info import getStockInfo
 from django.http import JsonResponse
 from json import dumps, loads
 from basic_app.ProphetTrend import forecast
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt  # temporary for debugging — remove later and use proper CSRF
+def search_stock(request):
+    if request.method == 'POST':
+        search_data = request.POST.get('searchData', '').strip()
+
+        if not search_data:
+            return JsonResponse({'data': []})
+
+        try:
+            results = getStockInfo(search_data)
+            if results and isinstance(results, list):
+                return JsonResponse({'data': results})
+            else:
+                return JsonResponse({'data': []})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
 
 def dashboard(request):
     return render(request, "basic_app/dashboard.html")

@@ -23,7 +23,8 @@
       </div>
 
     <div class="col-4">
-      <a href="{{info.symbol}}/add" class = "btn btn-primary">Add to Portfolio</a>
+      <a href="{% url 'basic_app:addToPortfolio' info.symbol %}" class="btn btn-primary">Add to Portfolio</a>
+
       <!-- <input type="button" data-symbol={{info.symbol}} data-name={{info.shortName}} data-action="add" class="btn btn-primary update-portfolio" style="display:inline-block" value="Add to Portfolio"> -->
       <a href="{% url 'basic_app:prediction' info.symbol %}" class="btn btn-success">See Price Prediction</a>
 
@@ -433,7 +434,7 @@
 
 // Chart.defaults.global.defaultFontFamily = "Lato";
 // Chart.defaults.global.defaultFontSize = 18;
-var sentiment_data = {{sentiment_data | safe}}
+var sentiment_data = {{ sentiment_data | safe }}
 var pos = sentiment_data['positive'];
 var neg = sentiment_data['negative'];
 var neu = sentiment_data['neutral'];
