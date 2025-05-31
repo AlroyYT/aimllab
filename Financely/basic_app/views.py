@@ -19,6 +19,11 @@ from django.http import JsonResponse
 from json import dumps, loads
 from basic_app.ProphetTrend import forecast
 from django.views.decorators.csrf import csrf_exempt
+import os
+import json
+import google.generativeai as genai
+from django.views.decorators.http import require_http_methods
+from django.conf import settings
 
 
 @csrf_exempt  # temporary for debugging — remove later and use proper CSRF
@@ -301,3 +306,186 @@ def quantitySub(request, symbol):
                 stock.save()
 
     return redirect("basic_app:portfolio")
+try:
+    genai.configure(api_key=settings.GEMINI_API_KEY)
+    print(f"Google AI configured successfully")
+except Exception as e:
+    print(f"Error configuring Google AI: {e}")
+def chatbot_home(request):
+    """Render the main chatbot interface"""
+    return render(request, 'basic_app/chatbot.html')
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def chat_with_ai(request):
+    """Handle chat messages and return AI responses"""
+    try:
+        data = json.loads(request.body)
+        user_message = data.get('message', '').strip()
+        
+        if not user_message:
+            return JsonResponse({
+                'error': 'Message cannot be empty',
+                'status': 'error'
+            }, status=400)
+        
+        # Use gemini-1.5-flash model
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        # Financial context prompt
+        financial_prompt = f"""
+        You are a helpful financial AI assistant. Your role is to provide accurate, helpful financial advice and information. 
+        Please focus on:
+        - Personal finance management
+        - Investment advice (general, not specific stock picks)
+        - Budgeting tips
+        - Financial planning
+        - Economic concepts explanation
+        - Risk management
+        
+        Always remind users that this is general advice and they should consult with qualified financial advisors for personalized advice.
+        
+        User question: {user_message}
+        
+        Please provide a concise but helpful response.
+        """
+        
+        # Generate response
+        response = model.generate_content(financial_prompt)
+        
+        if response and response.text:
+            return JsonResponse({
+                'response': response.text,
+                'status': 'success'
+            })
+        else:
+            return JsonResponse({
+                'error': 'Sorry, I could not generate a response. Please try again.',
+                'status': 'error'
+            }, status=500)
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'error': 'Invalid JSON data',
+            'status': 'error'
+        }, status=400)
+    except Exception as e:
+        print(f"Chat error: {str(e)}")
+        return JsonResponse({
+            'error': f'Error processing request: {str(e)}',
+            'status': 'error'
+        }, status=500)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def financial_analysis(request):
+    """Analyze financial data or scenarios"""
+    try:
+        data = json.loads(request.body)
+        scenario = data.get('scenario', '').strip()
+        
+        if not scenario:
+            return JsonResponse({
+                'error': 'Scenario cannot be empty',
+                'status': 'error'
+            }, status=400)
+        
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        analysis_prompt = f"""
+        As a financial analyst AI, please analyze the following financial scenario:
+        
+        {scenario}
+        
+        Provide a detailed analysis including:
+        1. Key financial metrics or considerations
+        2. Potential risks and opportunities
+        3. Recommendations or next steps
+        4. Important disclaimers
+        
+        Keep the analysis professional and educational. Limit response to 500 words.
+        """
+        
+        response = model.generate_content(analysis_prompt)
+        
+        if response and response.text:
+            return JsonResponse({
+                'analysis': response.text,
+                'status': 'success'
+            })
+        else:
+            return JsonResponse({
+                'error': 'Could not generate analysis',
+                'status': 'error'
+            }, status=500)
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'error': 'Invalid JSON data',
+            'status': 'error'
+        }, status=400)
+    except Exception as e:
+        print(f"Analysis error: {str(e)}")
+        return JsonResponse({
+            'error': f'Error processing analysis: {str(e)}',
+            'status': 'error'
+        }, status=500)
+
+@require_http_methods(["GET"])
+def get_financial_tips(request):
+    """Get general financial tips"""
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        tips_prompt = """
+        Provide 5 practical financial tips for someone looking to improve their personal finances. 
+        Make them actionable and suitable for beginners to intermediate level financial knowledge.
+        Format as a numbered list with brief explanations.
+        Keep it concise - about 2-3 sentences per tip.
+        """
+        
+        response = model.generate_content(tips_prompt)
+        
+        if response and response.text:
+            return JsonResponse({
+                'tips': response.text,
+                'status': 'success'
+            })
+        else:
+            return JsonResponse({
+                'error': 'Could not generate tips',
+                'status': 'error'
+            }, status=500)
+        
+    except Exception as e:
+        print(f"Tips error: {str(e)}")
+        return JsonResponse({
+            'error': f'Error getting tips: {str(e)}',
+            'status': 'error'
+        }, status=500)
+
+@require_http_methods(["GET"])
+def test_ai_connection(request):
+    """Test endpoint to verify AI API is working"""
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        response = model.generate_content("Say 'API connection successful!' if you can read this.")
+        
+        if response and response.text:
+            return JsonResponse({
+                'message': 'AI API connection test',
+                'response': response.text,
+                'status': 'success'
+            })
+        else:
+            return JsonResponse({
+                'error': 'No response from AI model',
+                'status': 'error'
+            }, status=500)
+        
+    except Exception as e:
+        print(f"Connection test error: {str(e)}")
+        return JsonResponse({
+            'error': f'AI API connection failed: {str(e)}',
+            'status': 'error'
+        }, status=500)

@@ -24,7 +24,7 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-v&g3s&y$lnzs(ph^2*o*n+nh(1=bc0bmq^6xnn^0-w)d*o(jz)'
-
+GEMINI_API_KEY = 'AIzaSyCJl0VpJhZ8ZXapT3j5dwOy3bCHfLnOXYA'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

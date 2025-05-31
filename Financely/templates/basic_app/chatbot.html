@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial AI Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .chat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .chat-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .action-buttons {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons button {
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .action-buttons button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .action-buttons button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: #007bff;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.ai .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.error .message-content {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: #007bff;
+            color: white;
+        }
+
+        .message.ai .message-avatar {
+            background: #28a745;
+            color: white;
+        }
+
+        .message.error .message-avatar {
+            background: #dc3545;
+            color: white;
+        }
+
+        .input-section {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            gap: 10px;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        #messageInput:focus {
+            border-color: #007bff;
+        }
+
+        #sendBtn {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        #sendBtn:hover:not(:disabled) {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        #sendBtn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-indicator {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            color: #6c757d;
+        }
+
+        .loading-indicator.show {
+            display: block;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 12px 16px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #6c757d;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Scrollbar styling */
+        .message-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .message-area::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .message-area::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .message-area::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .chat-container {
+                height: 90vh;
+            }
+            
+            .message-content {
+                max-width: 85%;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🤖 Financial AI Assistant</h1>
+            <p>Get expert financial advice powered by AI</p>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="getTips()" id="tipsBtn">💡 Get Financial Tips</button>
+            <button onclick="analyzeScenario()" id="analysisBtn">📊 Analyze Scenario</button>
+            <button onclick="testConnection()" id="testBtn">🔗 Test Connection</button>
+        </div>
+        
+        <div id="messageArea" class="message-area">
+            <div class="message ai">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    Hello! I'm your financial AI assistant. I can help with:
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Investment guidance</li>
+                        <li>Budgeting tips</li>
+                        <li>Financial planning advice</li>
+                        <li>Risk management strategies</li>
+                    </ul>
+                    What financial question can I help you with today?
+                </div>
+            </div>
+        </div>
+        
+        <div class="loading-indicator" id="loadingIndicator">
+            <div class="typing-indicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+        
+        <div class="input-section">
+            <input 
+                type="text" 
+                id="messageInput" 
+                placeholder="Ask me anything about finance..." 
+                onkeypress="handleEnter(event)"
+                maxlength="500"
+            >
+            <button onclick="sendMessage()" id="sendBtn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Get CSRF token for Django
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function addMessage(content, type) {
+            const messageArea = document.getElementById('messageArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.innerHTML = type === 'user' ? '👤' : (type === 'error' ? '❌' : '🤖');
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.innerHTML = content.replace(/\n/g, '<br>');
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
+            messageArea.appendChild(messageDiv);
+            messageArea.scrollTop = messageArea.scrollHeight;
+        }
+
+        function setLoading(loading) {
+            const sendBtn = document.getElementById('sendBtn');
+            const messageInput = document.getElementById('messageInput');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const actionButtons = ['tipsBtn', 'analysisBtn', 'testBtn'];
+            
+            // Disable/enable all interactive elements
+            sendBtn.disabled = loading;
+            messageInput.disabled = loading;
+            actionButtons.forEach(btnId => {
+                document.getElementById(btnId).disabled = loading;
+            });
+            
+            // Update UI
+            if (loading) {
+                sendBtn.textContent = 'Sending...';
+                loadingIndicator.classList.add('show');
+            } else {
+                sendBtn.textContent = 'Send';
+                loadingIndicator.classList.remove('show');
+            }
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message) {
+                alert('Please enter a message!');
+                return;
+            }
+            
+            addMessage(message, 'user');
+            messageInput.value = '';
+            setLoading(true);
+            
+            try {
+                const response = await fetch('/api/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addMessage(data.response, 'ai');
+                } else {
+                    addMessage(`Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                addMessage(`Connection error: ${error.message}`, 'error');
+            } finally {
+                setLoading(false);
+                messageInput.focus();
+            }
+        }
+
+        async function getTips() {
+            setLoading(true);
+            addMessage('Getting financial tips for you...', 'ai');
+            
+            try {
+                const response = await fetch('/api/tips/');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addMessage(data.tips, 'ai');
+                } else {
+                    addMessage(`Error getting tips: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('Tips error:', error);
+                addMessage(`Connection error: ${error.message}`, 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        async function analyzeScenario() {
+            const scenario = prompt("📊 Enter a financial scenario to analyze:\n\nExample: 'I have $10,000 to invest and I'm 25 years old'");
+            if (!scenario || scenario.trim() === '') return;
+            
+            setLoading(true);
+            addMessage(`📊 Analyzing scenario: ${scenario}`, 'user');
+            addMessage('Analyzing your financial scenario...', 'ai');
+            
+            try {
+                const response = await fetch('/api/analysis/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({ scenario: scenario })
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addMessage(data.analysis, 'ai');
+                } else {
+                    addMessage(`Error in analysis: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('Analysis error:', error);
+                addMessage(`Connection error: ${error.message}`, 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        async function testConnection() {
+            setLoading(true);
+            addMessage('Testing AI connection...', 'ai');
+            
+            try {
+                const response = await fetch('/api/test/');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addMessage(`✅ Connection Test Successful!\n\n${data.response}`, 'ai');
+                } else {
+                    addMessage(`❌ Connection test failed: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('Connection test error:', error);
+                addMessage(`❌ Connection error: ${error.message}`, 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Focus on input when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('messageInput').focus();
+        });
+    </script>
+</body>
+</html>
