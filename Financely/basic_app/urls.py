@@ -29,4 +29,9 @@ urlpatterns = [
     path('api/analysis/', views.financial_analysis, name='financial_analysis'),
     path('api/tips/', views.get_financial_tips, name='financial_tips'),
     path('api/test/', views.test_ai_connection, name='test_ai_connection'),
+    
+    # NEW: Acquisition Target Identifier URLs
+    path('acquisition-targets/', views.acquisition_target_dashboard, name='acquisition_dashboard'),
+    path('api/acquisition/analyze/', views.analyze_acquisition_targets, name='analyze_targets'),
+    path('api/acquisition/company-details/', views.get_company_details, name='company_details'),
 ]

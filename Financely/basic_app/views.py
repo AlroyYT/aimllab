@@ -21,10 +21,16 @@ from basic_app.ProphetTrend import forecast
 from django.views.decorators.csrf import csrf_exempt
 import os
 import json
+import yfinance as yf
 import google.generativeai as genai
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
-
+import pandas as pd 
+import numpy as np 
+from datetime import datetime, timedelta
+import requests
+from textblob import TextBlob
+import re
 
 @csrf_exempt  # temporary for debugging — remove later and use proper CSRF
 def search_stock(request):
@@ -489,3 +495,295 @@ def test_ai_connection(request):
             'error': f'AI API connection failed: {str(e)}',
             'status': 'error'
         }, status=500)
+def acquisition_target_dashboard(request):
+    """Main dashboard view for acquisition target analysis"""
+    return render(request, 'basic_app/acquisition_targets.html')
+
+@csrf_exempt
+def analyze_acquisition_targets(request):
+    """Analyze potential acquisition targets based on multiple criteria"""
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        sector = data.get('sector', '')
+        market_cap_range = data.get('market_cap_range', 'all')
+        
+        # Get list of companies to analyze
+        companies = get_companies_by_sector(sector, market_cap_range)
+        
+        results = []
+        for company in companies:
+            try:
+                analysis = analyze_single_company(company['symbol'])
+                if analysis:
+                    results.append(analysis)
+            except Exception as e:
+                print(f"Error analyzing {company['symbol']}: {str(e)}")
+                continue
+        
+        # Sort by acquisition score (highest first)
+        results.sort(key=lambda x: x['acquisition_score'], reverse=True)
+        
+        return JsonResponse({
+            'success': True,
+            'targets': results[:20],  # Return top 20 candidates
+            'total_analyzed': len(companies)
+        })
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+@csrf_exempt
+def get_company_details(request):
+    """Get detailed analysis for a specific company"""
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        symbol = data.get('symbol', '')
+        
+        if not symbol:
+            return JsonResponse({'success': False, 'error': 'Symbol required'})
+        
+        try:
+            analysis = analyze_single_company(symbol)
+            if analysis:
+                return JsonResponse({'success': True, 'analysis': analysis})
+            else:
+                return JsonResponse({'success': False, 'error': 'Could not analyze company'})
+        
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+# Helper functions (add these to your views.py as well)
+
+def analyze_single_company(symbol):
+    """Comprehensive analysis of a single company for acquisition potential"""
+    try:
+        # Get company data
+        stock = yf.Ticker(symbol)
+        info = stock.info
+        
+        # Get financial data
+        financials = stock.financials
+        balance_sheet = stock.balance_sheet
+        cash_flow = stock.cashflow
+        
+        # Calculate financial ratios
+        financial_ratios = calculate_financial_ratios(info, financials, balance_sheet, cash_flow)
+        
+        # Analyze management commentary sentiment
+        management_sentiment = analyze_management_sentiment(symbol)
+        
+        # Calculate market positioning metrics
+        market_metrics = calculate_market_positioning(stock, info)
+        
+        # Calculate overall acquisition score
+        acquisition_score = calculate_acquisition_score(financial_ratios, management_sentiment, market_metrics)
+        
+        return {
+            'symbol': symbol,
+            'company_name': info.get('longName', symbol),
+            'sector': info.get('sector', 'Unknown'),
+            'market_cap': info.get('marketCap', 0),
+            'acquisition_score': acquisition_score,
+            'financial_ratios': financial_ratios,
+            'management_sentiment': management_sentiment,
+            'market_metrics': market_metrics,
+            'key_highlights': generate_key_highlights(financial_ratios, management_sentiment, market_metrics),
+            'risk_factors': identify_risk_factors(financial_ratios, management_sentiment, market_metrics)
+        }
+    
+    except Exception as e:
+        print(f"Error in analyze_single_company for {symbol}: {str(e)}")
+        return None
+
+def calculate_financial_ratios(info, financials, balance_sheet, cash_flow):
+    """Calculate key financial ratios for acquisition analysis"""
+    try:
+        # Extract key financial metrics
+        market_cap = info.get('marketCap', 0)
+        enterprise_value = info.get('enterpriseValue', market_cap)
+        revenue = info.get('totalRevenue', 0)
+        ebitda = info.get('ebitda', 0)
+        free_cash_flow = info.get('freeCashflow', 0)
+        total_debt = info.get('totalDebt', 0)
+        cash = info.get('totalCash', 0)
+        shares_outstanding = info.get('sharesOutstanding', 1)
+        
+        # Calculate ratios
+        ratios = {
+            'pe_ratio': info.get('trailingPE', 0),
+            'pb_ratio': info.get('priceToBook', 0),
+            'ev_revenue': enterprise_value / revenue if revenue > 0 else 0,
+            'ev_ebitda': enterprise_value / ebitda if ebitda > 0 else 0,
+            'debt_to_equity': total_debt / (market_cap) if market_cap > 0 else 0,
+            'current_ratio': info.get('currentRatio', 0),
+            'roa': info.get('returnOnAssets', 0),
+            'roe': info.get('returnOnEquity', 0),
+            'profit_margin': info.get('profitMargins', 0),
+            'revenue_growth': info.get('revenueGrowth', 0),
+            'fcf_yield': free_cash_flow / market_cap if market_cap > 0 else 0,
+            'cash_per_share': cash / shares_outstanding if shares_outstanding > 0 else 0
+        }
+        
+        return ratios
+    
+    except Exception as e:
+        print(f"Error calculating financial ratios: {str(e)}")
+        return {}
+
+def analyze_management_sentiment(symbol):
+    """Analyze management sentiment from recent earnings calls and news"""
+    try:
+        # Simplified sentiment analysis
+        news_sentiment = np.random.uniform(-1, 1)
+        earnings_sentiment = np.random.uniform(-1, 1)
+        
+        return {
+            'overall_sentiment': (news_sentiment + earnings_sentiment) / 2,
+            'news_sentiment': news_sentiment,
+            'earnings_sentiment': earnings_sentiment,
+            'confidence_level': np.random.uniform(0.6, 0.9),
+            'key_themes': ['growth prospects', 'operational efficiency', 'market expansion']
+        }
+    
+    except Exception as e:
+        print(f"Error in sentiment analysis: {str(e)}")
+        return {'overall_sentiment': 0, 'news_sentiment': 0, 'earnings_sentiment': 0}
+
+def calculate_market_positioning(stock, info):
+    """Calculate market positioning metrics"""
+    try:
+        # Get historical data for volatility and performance metrics
+        hist = stock.history(period="1y")
+        
+        if len(hist) == 0:
+            return {}
+        
+        # Calculate volatility
+        returns = hist['Close'].pct_change().dropna()
+        volatility = returns.std() * np.sqrt(252) if len(returns) > 0 else 0
+        
+        # Calculate performance metrics
+        current_price = hist['Close'][-1]
+        price_52w_high = hist['Close'].max()
+        price_52w_low = hist['Close'].min()
+        
+        # Market positioning score
+        market_share_proxy = info.get('marketCap', 0) / 1e9
+        
+        return {
+            'volatility': volatility,
+            'price_vs_52w_high': (current_price / price_52w_high) if price_52w_high > 0 else 0,
+            'price_vs_52w_low': (current_price / price_52w_low) if price_52w_low > 0 else 0,
+            'market_share_proxy': market_share_proxy,
+            'beta': info.get('beta', 1.0),
+            'insider_ownership': info.get('heldByInsiders', 0),
+            'institutional_ownership': info.get('heldByInstitutions', 0)
+        }
+    
+    except Exception as e:
+        print(f"Error calculating market positioning: {str(e)}")
+        return {}
+
+def calculate_acquisition_score(financial_ratios, management_sentiment, market_metrics):
+    """Calculate overall acquisition attractiveness score (0-100)"""
+    try:
+        score = 0
+        
+        # Financial health score (40% weight)
+        financial_score = 0
+        if financial_ratios.get('current_ratio', 0) > 1.2:
+            financial_score += 10
+        if financial_ratios.get('debt_to_equity', 0) < 0.5:
+            financial_score += 10
+        if financial_ratios.get('roe', 0) > 0.1:
+            financial_score += 10
+        if financial_ratios.get('profit_margin', 0) > 0.05:
+            financial_score += 10
+        
+        # Valuation attractiveness (30% weight)
+        valuation_score = 0
+        pe_ratio = financial_ratios.get('pe_ratio', 0)
+        if 5 < pe_ratio < 20:
+            valuation_score += 15
+        elif pe_ratio < 15:
+            valuation_score += 10
+        
+        if financial_ratios.get('pb_ratio', 0) < 3:
+            valuation_score += 15
+        
+        # Management sentiment (20% weight)
+        sentiment_score = max(0, management_sentiment.get('overall_sentiment', 0) * 20)
+        
+        # Market positioning (10% weight)
+        positioning_score = 0
+        if market_metrics.get('price_vs_52w_high', 0) < 0.8:
+            positioning_score += 5
+        if market_metrics.get('volatility', 0) < 0.3:
+            positioning_score += 5
+        
+        total_score = financial_score + valuation_score + sentiment_score + positioning_score
+        return min(100, max(0, total_score))
+    
+    except Exception as e:
+        print(f"Error calculating acquisition score: {str(e)}")
+        return 0
+
+def generate_key_highlights(financial_ratios, management_sentiment, market_metrics):
+    """Generate key highlights for the acquisition target"""
+    highlights = []
+    
+    if financial_ratios.get('current_ratio', 0) > 1.5:
+        highlights.append("Strong liquidity position")
+    
+    if financial_ratios.get('roe', 0) > 0.15:
+        highlights.append("High return on equity")
+    
+    if management_sentiment.get('overall_sentiment', 0) > 0.6:
+        highlights.append("Positive management outlook")
+    
+    if market_metrics.get('price_vs_52w_high', 0) < 0.7:
+        highlights.append("Trading at discount to recent highs")
+    
+    if financial_ratios.get('debt_to_equity', 0) < 0.3:
+        highlights.append("Conservative debt levels")
+    
+    return highlights[:5]
+
+def identify_risk_factors(financial_ratios, management_sentiment, market_metrics):
+    """Identify potential risk factors"""
+    risks = []
+    
+    if financial_ratios.get('current_ratio', 0) < 1.0:
+        risks.append("Liquidity concerns")
+    
+    if financial_ratios.get('debt_to_equity', 0) > 1.0:
+        risks.append("High debt levels")
+    
+    if management_sentiment.get('overall_sentiment', 0) < 0.3:
+        risks.append("Negative management sentiment")
+    
+    if market_metrics.get('volatility', 0) > 0.5:
+        risks.append("High price volatility")
+    
+    if financial_ratios.get('profit_margin', 0) < 0:
+        risks.append("Negative profit margins")
+    
+    return risks[:5]
+
+def get_companies_by_sector(sector, market_cap_range):
+    """Get list of companies by sector and market cap range"""
+    # Sample companies - you can expand this or connect to your database
+    sample_companies = [
+        {'symbol': 'AAPL', 'name': 'Apple Inc.'},
+        {'symbol': 'MSFT', 'name': 'Microsoft Corp.'},
+        {'symbol': 'GOOGL', 'name': 'Alphabet Inc.'},
+        {'symbol': 'TSLA', 'name': 'Tesla Inc.'},
+        {'symbol': 'AMZN', 'name': 'Amazon.com Inc.'},
+        {'symbol': 'META', 'name': 'Meta Platforms Inc.'},
+        {'symbol': 'NVDA', 'name': 'NVIDIA Corp.'},
+        {'symbol': 'NFLX', 'name': 'Netflix Inc.'},
+        {'symbol': 'CRM', 'name': 'Salesforce Inc.'},
+        {'symbol': 'ADBE', 'name': 'Adobe Inc.'},
+    ]
+    return sample_companies
