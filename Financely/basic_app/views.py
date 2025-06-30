@@ -6,6 +6,7 @@ from .decorators import unauthenticated_user, allowed_users
 from .ProphetTrend import forecast
 from basic_app.stock_data import candlestick_data, get_data, get_name, get_price
 from basic_app.FA import piotroski
+from django.core.cache import cache
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -240,6 +241,29 @@ def registerPage(request):
 def statisticsAdmin(request):
     return render(request, "basic_app/statisticsAdmin.html")
 
+def get_usd_to_inr_rate():
+    """
+    Fetch current USD to INR exchange rate with caching
+    Falls back to a default rate if API fails
+    """
+    # Check if rate is cached (cache for 1 hour)
+    cached_rate = cache.get('usd_to_inr_rate')
+    if cached_rate:
+        return cached_rate
+    
+    try:
+        # Using a free exchange rate API (you can use any API you prefer)
+        response = requests.get('https://api.exchangerate-api.com/v4/latest/USD', timeout=5)
+        data = response.json()
+        rate = data['rates']['INR']
+        
+        # Cache the rate for 1 hour
+        cache.set('usd_to_inr_rate', rate, 3600)
+        return rate
+    except:
+        # Fallback rate if API fails
+        return 83.5
+
 def price_prediction(request, symbol):
     price_prediction, metrics = forecast(symbol)
     
@@ -247,10 +271,40 @@ def price_prediction(request, symbol):
         # Handle error case
         return render(request, "basic_app/error.html", {'error_message': f"Unable to retrieve data for {symbol}"})
     
+    # Get dynamic USD to INR conversion rate
+    USD_TO_INR = get_usd_to_inr_rate()
+    
+    # Convert all price-related metrics to INR
+    if metrics:
+        # Direct price conversions
+        price_fields = [
+            'last_price', 'forecast_end_price', 'peak_price', 'min_price', 
+            'support_level', 'resistance_level'
+        ]
+        
+        for field in price_fields:
+            if field in metrics:
+                metrics[field] = round(metrics[field] * USD_TO_INR, 2)
+        
+        # Convert quarterly forecast prices
+        if 'quarterly_forecast' in metrics:
+            for quarter in metrics['quarterly_forecast']:
+                quarter['avg_price'] = round(quarter['avg_price'] * USD_TO_INR, 2)
+                quarter['min_price'] = round(quarter['min_price'] * USD_TO_INR, 2)
+                quarter['max_price'] = round(quarter['max_price'] * USD_TO_INR, 2)
+        
+        # Update text fields to use ₹ symbol instead of $
+        text_fields = ['insight_text', 'seasonal_pattern', 'additional_insights']
+        for field in text_fields:
+            if field in metrics and metrics[field]:
+                metrics[field] = metrics[field].replace('$', '₹')
+    
     return render(request, "basic_app/price_prediction.html", {
         'price_prediction': price_prediction, 
         'metrics': metrics,
-        'page_title': f"{symbol} Forecast"
+        'page_title': f"{symbol} Forecast",
+        'currency_symbol': '₹',
+        'exchange_rate': USD_TO_INR  # Optional: pass rate to template if needed
     })
 
 def addToPortfolio(request, symbol):

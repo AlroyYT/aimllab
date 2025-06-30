@@ -1425,3 +1425,294 @@ WARNING 2025-06-11 19:07:22,748 get_stock_info Rate limit exceeded (attempt 2/3)
 WARNING 2025-06-11 19:07:26,943 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
 ERROR 2025-06-11 19:07:26,943 get_stock_info Failed to fetch stock info for 'zomat]]\[' after 3 attempts due to rate limiting.
 WARNING 2025-06-11 19:07:28,021 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:43:16,300 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:43:18,610 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:44:29,289 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:44:29,851 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:44:31,417 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:44:31,956 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:44:32,541 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:44:34,655 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:44:35,523 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:44:35,523 get_stock_info Failed to fetch stock info for 'n' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:44:38,863 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:44:38,863 get_stock_info Failed to fetch stock info for 'nvid' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:44:38,896 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:45:57,715 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:46:02,515 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:46:04,715 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:46:08,898 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:46:08,899 get_stock_info Failed to fetch stock info for 'AAPL' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:47:38,080 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:38,773 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:41,121 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:41,451 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:43,248 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:47:43,566 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:47:46,216 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:47,363 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:47:47,364 get_stock_info Failed to fetch stock info for 'zo' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:47:48,260 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:49,363 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:50,379 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:47:52,497 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:54,504 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:47:54,505 get_stock_info Failed to fetch stock info for 'zomat' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:47:54,630 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:47:57,733 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:59,859 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:47:59,862 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:48:01,994 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:48:06,040 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:48:06,151 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:48:06,151 get_stock_info Failed to fetch stock info for 'zomato' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:48:17,085 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:48:19,752 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:48:21,939 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:48:26,057 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:48:26,058 get_stock_info Failed to fetch stock info for 'sw' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:48:26,859 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:48:31,467 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:48:36,930 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:48:39,089 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:48:43,226 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:48:43,226 get_stock_info Failed to fetch stock info for 'SWIGGY.BO' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:50:39,854 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:52:56,154 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:52:56,484 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:52:58,691 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 18:53:02,884 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 18:53:02,884 get_stock_info Failed to fetch stock info for 'zomato' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 18:53:17,815 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 18:53:20,097 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:32:41,149 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:32:43,247 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:32:47,349 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 20:32:47,349 get_stock_info Failed to fetch stock info for 'nv' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 20:39:52,099 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:39:54,414 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:39:55,901 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:39:57,105 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:39:58,190 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:39:58,587 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 20:39:58,588 get_stock_info Failed to fetch stock info for 's' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 20:39:59,274 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:40:00,338 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:40:02,514 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:40:03,485 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 20:40:03,500 get_stock_info Failed to fetch stock info for 'sa' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 20:40:04,008 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:40:06,273 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:40:06,669 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 20:40:06,670 get_stock_info Failed to fetch stock info for 'samsun' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 20:40:10,579 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 20:40:10,580 get_stock_info Failed to fetch stock info for '005930.KS' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 20:40:23,046 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:40:25,236 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:40:29,429 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 20:40:29,429 get_stock_info Failed to fetch stock info for '005930.KS' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 20:40:41,773 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:40:43,935 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:40:50,680 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 20:40:52,851 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 20:40:57,004 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 20:40:57,004 get_stock_info Failed to fetch stock info for '266390.KS' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:36:30,044 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:36:30,788 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:36:32,236 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:36:32,895 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:36:36,181 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:36:36,340 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:36:36,341 get_stock_info Failed to fetch stock info for 'z' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:36:37,016 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:36:37,016 get_stock_info Failed to fetch stock info for 'zer' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:36:37,552 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:36:38,299 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:36:38,741 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:36:42,532 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:13,263 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:14,080 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:15,386 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:15,683 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:16,244 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:18,269 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:19,565 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:37:19,566 get_stock_info Failed to fetch stock info for 'sha' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:37:20,357 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:37:20,357 get_stock_info Failed to fetch stock info for 'share' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:37:20,394 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:20,428 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:20,797 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:22,544 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:22,609 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:24,010 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:24,583 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:37:24,584 get_stock_info Failed to fetch stock info for 'share' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:37:25,608 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:26,193 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:26,443 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:26,964 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:27,796 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:28,617 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:29,972 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:37:30,385 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:37:30,386 get_stock_info Failed to fetch stock info for 'sharekh' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:37:31,963 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:37:31,963 get_stock_info Failed to fetch stock info for 's' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:37:32,153 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:37:32,804 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:37:32,804 get_stock_info Failed to fetch stock info for 'app' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:37:36,317 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:37:36,318 get_stock_info Failed to fetch stock info for 'AAPL' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:38:14,829 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:38:17,295 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:38:18,824 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:38:20,037 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:38:21,013 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:38:21,487 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:38:21,487 get_stock_info Failed to fetch stock info for 'nvi' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:38:22,218 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:38:23,243 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:38:25,194 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:38:25,194 get_stock_info Failed to fetch stock info for 'nvid' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:38:26,518 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:38:26,518 get_stock_info Failed to fetch stock info for 'nvidia' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:38:28,175 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:38:30,368 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:38:34,620 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:38:34,620 get_stock_info Failed to fetch stock info for 'nvid' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:38:34,670 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:38:36,838 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:38:41,025 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:38:41,025 get_stock_info Failed to fetch stock info for 'NVDA' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:39:07,250 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:09,427 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:11,676 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:13,849 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:14,009 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:15,949 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:16,199 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:18,135 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:18,141 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:20,316 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:20,365 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:39:20,365 get_stock_info Failed to fetch stock info for 'neude' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:39:22,308 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:39:22,308 get_stock_info Failed to fetch stock info for 'neudes' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:39:22,476 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:23,200 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:24,504 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:39:24,504 get_stock_info Failed to fetch stock info for 'neudesi' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:39:24,636 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:26,150 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:26,847 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:28,351 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:29,017 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:29,287 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:34,312 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:39:36,489 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:39:40,667 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:39:40,667 get_stock_info Failed to fetch stock info for 'swigg' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:39:43,448 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:40:01,075 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:40:01,386 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:40:03,235 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:40:03,559 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:40:07,467 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:40:07,498 get_stock_info Failed to fetch stock info for 'm' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:40:07,974 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:40:10,155 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:41:23,082 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:41:24,963 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:41:27,083 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:41:27,739 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:41:29,867 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:41:31,205 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:41:31,205 get_stock_info Failed to fetch stock info for 'merc' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:41:32,418 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:41:34,523 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:41:35,371 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:41:37,358 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:41:38,643 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:41:38,644 get_stock_info Failed to fetch stock info for 'mercar' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:41:39,484 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:10,433 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:12,403 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:12,545 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:16,656 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:42:16,656 get_stock_info Failed to fetch stock info for 'neud' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:42:17,080 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:17,497 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:19,064 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:19,203 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:19,527 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:19,603 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:21,171 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:21,627 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:22,210 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:23,326 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:42:23,327 get_stock_info Failed to fetch stock info for 'neudes' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:42:23,720 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:42:23,720 get_stock_info Failed to fetch stock info for 'neudesi' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:42:24,041 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:24,338 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:24,655 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:25,297 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:42:25,297 get_stock_info Failed to fetch stock info for 'neudesi' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:42:26,767 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:32,196 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:42:32,196 get_stock_info Failed to fetch stock info for 'ibm' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:42:38,570 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:40,071 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:42:40,672 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:42,263 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:42:46,394 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:42:46,394 get_stock_info Failed to fetch stock info for 'ibm' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:44:32,803 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:34,011 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:34,702 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:34,915 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:44:35,704 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:36,114 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:44:36,796 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:39,032 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:44:39,032 get_stock_info Failed to fetch stock info for 'no,' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:44:39,618 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:40,236 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:44:40,236 get_stock_info Failed to fetch stock info for 'no' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:44:51,756 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:52,191 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:52,598 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:54,809 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:55,608 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:56,911 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:44:57,734 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:44:58,009 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:44:59,309 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:45:00,148 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:45:01,025 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:45:01,025 get_stock_info Failed to fetch stock info for 'chev' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:45:03,778 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:55:18,754 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:55:20,947 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:55:24,589 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:55:25,113 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:55:25,114 get_stock_info Failed to fetch stock info for 'apple' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:55:26,782 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:55:26,906 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:55:27,396 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:55:30,966 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:55:30,966 get_stock_info Failed to fetch stock info for 'a' after 3 attempts due to rate limiting.
+WARNING 2025-06-30 23:57:15,141 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-06-30 23:57:17,246 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-06-30 23:57:21,348 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-06-30 23:57:21,348 get_stock_info Failed to fetch stock info for 'CL=F' after 3 attempts due to rate limiting.
+WARNING 2025-07-01 00:05:25,684 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-07-01 00:05:27,613 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-07-01 00:05:27,806 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-07-01 00:05:29,737 get_stock_info Rate limit exceeded (attempt 2/3). Waiting for 4 seconds.
+WARNING 2025-07-01 00:05:31,460 get_stock_info Rate limit exceeded (attempt 1/3). Waiting for 2 seconds.
+WARNING 2025-07-01 00:05:31,909 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-07-01 00:05:31,909 get_stock_info Failed to fetch stock info for 'a' after 3 attempts due to rate limiting.
+WARNING 2025-07-01 00:05:33,879 get_stock_info Rate limit exceeded (attempt 3/3). Waiting for 8 seconds.
+ERROR 2025-07-01 00:05:33,879 get_stock_info Failed to fetch stock info for 'app' after 3 attempts due to rate limiting.

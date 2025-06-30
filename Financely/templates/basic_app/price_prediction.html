@@ -47,7 +47,7 @@
               <i class="fas fa-dollar-sign"></i>
             </div>
             <span class="metric-label">Current Price</span>
-            <span class="metric-value">${{metrics.last_price}}</span>
+            <span class="metric-value">₹{{metrics.last_price}}</span>
             <span class="metric-date">as of {{metrics.last_date}}</span>
           </div>
           
@@ -56,7 +56,7 @@
               <i class="fas fa-chart-line"></i>
             </div>
             <span class="metric-label">Projected Price (1 Year)</span>
-            <span class="metric-value">${{metrics.forecast_end_price}}</span>
+            <span class="metric-value">₹{{metrics.forecast_end_price}}</span>
             <span class="metric-change {{metrics.growth_class}}">
               {{metrics.growth_pct}}% <i class="fas fa-{{metrics.growth_icon}}"></i>
             </span>
@@ -67,7 +67,7 @@
               <i class="fas fa-arrow-up"></i>
             </div>
             <span class="metric-label">Projected High</span>
-            <span class="metric-value">${{metrics.peak_price}}</span>
+            <span class="metric-value">₹{{metrics.peak_price}}</span>
             <span class="metric-change positive">
               +{{metrics.peak_growth}}% <i class="fas fa-arrow-up"></i>
             </span>
@@ -78,7 +78,7 @@
               <i class="fas fa-arrow-down"></i>
             </div>
             <span class="metric-label">Projected Low</span>
-            <span class="metric-value">${{metrics.min_price}}</span>
+            <span class="metric-value">₹{{metrics.min_price}}</span>
             <span class="metric-change {{metrics.min_class}}">
               {{metrics.min_decline}}% <i class="fas fa-{{metrics.min_icon}}"></i>
             </span>
@@ -99,8 +99,8 @@
             </div>
             <span class="metric-label">Key Levels</span>
             <span class="metric-value levels-container">
-              <span class="support-level">S: ${{metrics.support_level}}</span>
-              <span class="resistance-level">R: ${{metrics.resistance_level}}</span>
+              <span class="support-level">S: ₹{{metrics.support_level}}</span>
+              <span class="resistance-level">R: ₹{{metrics.resistance_level}}</span>
             </span>
             <span class="metric-info">Support / Resistance</span>
           </div>
@@ -130,11 +130,11 @@
             {% for quarter in metrics.quarterly_forecast %}
             <tr>
               <td class="period-cell">{{quarter.period}}</td>
-              <td class="price-cell">${{quarter.avg_price}}</td>
+              <td class="price-cell">₹{{quarter.avg_price}}</td>
               <td class="range-cell">
-                <span class="min-value">${{quarter.min_price}}</span>
+                <span class="min-value">₹{{quarter.min_price}}</span>
                 <span class="range-separator">-</span>
-                <span class="max-value">${{quarter.max_price}}</span>
+                <span class="max-value">₹{{quarter.max_price}}</span>
               </td>
               <td class="date-cell">{{quarter.end_date}}</td>
             </tr>
